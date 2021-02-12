@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://simonst:admin123@devlink.qfkzi.mongodb.net/DevLink?retryWrites=true&w=majority"
+}

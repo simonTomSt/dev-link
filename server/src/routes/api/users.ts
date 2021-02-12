@@ -1,7 +1,9 @@
+import { addUserValidator } from "../../handlers/validators/usersValidators";
+import { createUser } from "../../controllers/usersController";
 import express from "express";
 
 const router = express.Router();
 
-router.get("/", (req, res) => res.send("User Note"));
+router.post("/", addUserValidator, createUser);
 
 export const usersRoutes = router;

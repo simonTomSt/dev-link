@@ -1,7 +1,14 @@
 import express from "express";
+import {authMiddleware} from "../../middleware/authMiddleware";
+import {authLoginValidator} from "../../handlers/validators/authValidators";
+import {authLogin, getUserByToken} from "../../controllers/authController";
 
-export const router = express.Router();
+const router = express.Router();
 
-router.get("/", (req, res) => res.send("User Note"));
+router.get("/", authMiddleware, getUserByToken);
+
+
+router.post("/login", authLoginValidator, authLogin)
+
 
 export const authRoutes = router;

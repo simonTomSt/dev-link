@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://simonst:admin123@devlink.qfkzi.mongodb.net/DevLink?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://simonst:admin123@devlink.qfkzi.mongodb.net/DevLink?retryWrites=true&w=majority",
+  "jwtToken": "secretToken"
 }

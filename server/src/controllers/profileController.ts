@@ -21,7 +21,7 @@ export const createUserProfile = async (req: express.Request<ProfileDoc>, res: e
     !errors.isEmpty() && res.status(400).json({errors: errors.array()});
 
 
-  const profileFields = generateProfileFields(req);
+    const profileFields = generateProfileFields(req);
 
     try {
         let profile = await Profile.findOne({user: req.params.id})
@@ -47,6 +47,17 @@ export const getAllProfiles = async (req: express.Request<ProfileDoc>, res: expr
     try {
         const profiles = await Profile.find().populate('user', ['name', 'avatar']);
         res.json(profiles);
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send('Server error');
+    }
+}
+
+export const deleteUserProfile = async (req: express.Request, res: express.Response) => {
+    try {
+        await Profile.findOneAndRemove({user: req.params.id});
+        await Profile.findOneAndRemove({_id: req.params.id});
+        res.json({msg: 'User removed'})
     } catch (err) {
         console.log(err.message);
         res.status(500).send('Server error');

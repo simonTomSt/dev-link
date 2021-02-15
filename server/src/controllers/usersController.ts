@@ -11,8 +11,7 @@ export const createUser = async (
     req: express.Request<UserDoc>,
     resp: express.Response
 ) => {
-    const errors = validationResult(req);
-    !errors.isEmpty() && resp.status(400).json({errors: errors.array()});
+
 
     const {name, email, password} = req.body;
 

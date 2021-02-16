@@ -67,6 +67,7 @@ export const getPostById = async (
     res.status(500).send("Server error");
   }
 };
+
 export const deletePostsById = async (
   req: express.Request,
   res: express.Response
@@ -83,6 +84,55 @@ export const deletePostsById = async (
     console.log(err);
     if (err.kind === "ObjectId")
       return res.status(404).json({ msg: "Post not found" });
+    res.status(500).send("Server error");
+  }
+};
+
+export const likePost = async (req: express.Request, res: express.Response) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).json({ msg: "There is no such a post" });
+    if (
+      post.likes &&
+      post.likes.filter((like) => like.user?.toString() == req.body.user.id)
+        .length > 0
+    ) {
+      return res.status(400).json({ msg: "Post already liked" });
+    }
+
+    post.likes?.unshift({ user: req.body.user.id });
+    await post.save();
+    res.json(post.likes);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error");
+  }
+};
+
+export const unlikePost = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).json({ msg: "There is no such a post" });
+    if (
+      post.likes &&
+      post.likes.filter((like) => like.user?.toString() == req.body.user.id)
+        .length === 0
+    ) {
+      return res.status(400).json({ msg: "Post has not yet been liked" });
+    }
+
+    const removeIndex = post.likes
+      ?.map((like) => like.user?.toString())
+      .indexOf(req.body.user.id) as number;
+    post.likes?.splice(removeIndex, 1);
+
+    await post.save();
+    res.json(post.likes);
+  } catch (err) {
+    console.log(err);
     res.status(500).send("Server error");
   }
 };

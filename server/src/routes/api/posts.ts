@@ -4,6 +4,8 @@ import {
   getAllPosts,
   getPostById,
   getUserPosts,
+  likePost,
+  unlikePost,
 } from "../../controllers/postsController";
 
 import { authMiddleware } from "../../middleware/authMiddleware";
@@ -19,4 +21,8 @@ router.get("/user", authMiddleware, getUserPosts);
 router.delete("/:id", authMiddleware, deletePostsById);
 
 router.post("/:id", authMiddleware, createPostValidator, createPost);
+
+router.put("/like/:id", authMiddleware, likePost);
+router.put("/unlike/:id", authMiddleware, unlikePost);
+
 export const postsRoutes = router;

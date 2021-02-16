@@ -155,7 +155,7 @@ export const commentPost = async (
       text: req.body.text,
       name: user.name,
       avatar: user.avatar,
-      user: req.params.id,
+      user: req.body.user.id,
     } as unknown) as PostDoc;
 
     post?.comments?.unshift(newComment);

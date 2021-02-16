@@ -1,5 +1,7 @@
 import {
+  commentPost,
   createPost,
+  deleteComment,
   deletePostsById,
   getAllPosts,
   getPostById,
@@ -7,9 +9,12 @@ import {
   likePost,
   unlikePost,
 } from "../../controllers/postsController";
+import {
+  commentValidator,
+  createPostValidator,
+} from "../../handlers/validators/postsValidator";
 
 import { authMiddleware } from "../../middleware/authMiddleware";
-import { createPostValidator } from "../../handlers/validators/postsValidator";
 import express from "express";
 
 export const router = express.Router();
@@ -21,6 +26,8 @@ router.get("/user", authMiddleware, getUserPosts);
 router.delete("/:id", authMiddleware, deletePostsById);
 
 router.post("/:id", authMiddleware, createPostValidator, createPost);
+router.post("/comment/:id", authMiddleware, commentValidator, commentPost);
+router.delete("/comment/:id/:comment_id", authMiddleware, deleteComment);
 
 router.put("/like/:id", authMiddleware, likePost);
 router.put("/unlike/:id", authMiddleware, unlikePost);

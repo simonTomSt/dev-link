@@ -19,7 +19,6 @@ export const ProfileSchema = createSchema(
             from: Type.date({required: true}),
             to: Type.date(),
             current: Type.boolean(),
-            description: Type.string()
         }),
         experience: Type.array(
         ).of({

@@ -1,7 +1,9 @@
 import express from "express";
+import request from "request";
 import {Profile, ProfileDoc} from "../models/Profile";
 import {validationResult} from "express-validator";
 import {generateProfileFields} from "../handlers/helpers/profileGenerator";
+import config from "config";
 
 export const getUserProfile = async (req: express.Request, res: express.Response) => {
     try {
@@ -135,5 +137,25 @@ export const deleteUserEducation = async (req: express.Request, res: express.Res
     } catch (err) {
         console.log(err.message);
         res.status(500).send('Server error');
+    }
+}
+
+export const getUserGithub = async (req: express.Request, res: express.Response) => {
+    try {
+        const options = {
+            uri: `https://api.github.com/users/${req.params.name}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
+            method: 'GET',
+            headers: {'user-agent': 'node.js'}
+        }
+
+        request(options, (error, response, body) => {
+            error && console.log(error);
+            if (response.statusCode !== 200) return res.status(404).json({msg: "No Github profile found"});
+
+            res.json(JSON.parse(body));
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Server error')
     }
 }

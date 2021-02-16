@@ -6,7 +6,7 @@ import {
     addUserExperience,
     createUserProfile, deleteUserEducation, deleteUserExperience,
     deleteUserProfile,
-    getAllProfiles,
+    getAllProfiles, getUserGithub,
     getUserProfile
 } from "../../controllers/profileController";
 import {
@@ -20,6 +20,7 @@ const router = express.Router();
 
 router.get("/", getAllProfiles);
 router.get("/:id", getUserProfile);
+router.get("/github/:name", getUserGithub);
 
 router.delete("/delete/:id", authMiddleware, deleteUserProfile);
 router.delete("/experience/delete/:id", authMiddleware, deleteUserExperience);

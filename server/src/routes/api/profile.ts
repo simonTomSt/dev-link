@@ -11,6 +11,7 @@ import {
   deleteUserExperience,
   deleteUserProfile,
   getAllProfiles,
+  getUserGithub,
   getUserProfile,
 } from "../../controllers/profileController";
 
@@ -20,6 +21,7 @@ import express from "express";
 const router = express.Router();
 
 router.get("/", getAllProfiles);
+router.get("/github/:name", getUserGithub);
 router.get("/user/:id", getUserProfile);
 
 router.delete("/delete", authMiddleware, deleteUserProfile);

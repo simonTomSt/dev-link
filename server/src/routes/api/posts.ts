@@ -25,7 +25,7 @@ router.get("/user", authMiddleware, getUserPosts);
 
 router.delete("/:id", authMiddleware, deletePostsById);
 
-router.post("/:id", authMiddleware, createPostValidator, createPost);
+router.post("/", authMiddleware, createPostValidator, createPost);
 router.post("/comment/:id", authMiddleware, commentValidator, commentPost);
 router.delete("/comment/:id/:comment_id", authMiddleware, deleteComment);
 

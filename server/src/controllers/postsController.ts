@@ -12,14 +12,14 @@ export const createPost = async (
   !errors.isEmpty() && res.status(400).json({ errors: errors.array() });
 
   try {
-    const user = await User.findById(req.params.id).select("-password");
+    const user = await User.findById(req.body.user.id).select("-password");
     if (!user)
       return res.status(404).json({ msg: "There is no user with such id" });
     const newPost = new Post({
       text: req.body.text,
       name: user.name,
       avatar: user.avatar,
-      user: req.params.id,
+      user: req.body.user.id,
     });
 
     const post = await newPost.save();

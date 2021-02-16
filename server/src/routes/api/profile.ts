@@ -1,37 +1,48 @@
-import express from "express";
-
-import {authMiddleware} from "../../middleware/authMiddleware";
 import {
-    addUserEducation,
-    addUserExperience,
-    createUserProfile, deleteUserEducation, deleteUserExperience,
-    deleteUserProfile,
-    getAllProfiles,
-    getUserProfile
-} from "../../controllers/profileController";
-import {
-    addEducationValidation,
-    addExperienceValidation,
-    createProfileValidator
+  addEducationValidation,
+  addExperienceValidation,
+  createProfileValidator,
 } from "../../handlers/validators/profileValidator";
+import {
+  addUserEducation,
+  addUserExperience,
+  createUserProfile,
+  deleteUserEducation,
+  deleteUserExperience,
+  deleteUserProfile,
+  getAllProfiles,
+  getUserProfile,
+} from "../../controllers/profileController";
+
+import { authMiddleware } from "../../middleware/authMiddleware";
+import express from "express";
 
 const router = express.Router();
 
-
 router.get("/", getAllProfiles);
-router.get("/:id", getUserProfile);
+router.get("/user/:id", getUserProfile);
 
-router.delete("/delete/:id", authMiddleware, deleteUserProfile);
-router.delete("/experience/delete/:id", authMiddleware, deleteUserExperience);
-router.delete("/education/delete/:id", authMiddleware, deleteUserEducation);
+router.delete("/delete", authMiddleware, deleteUserProfile);
+router.delete("/experience/", authMiddleware, deleteUserExperience);
+router.delete("/education/", authMiddleware, deleteUserEducation);
 
-
+router.put(
+  "/education",
+  authMiddleware,
+  addEducationValidation,
+  addUserEducation
+);
+router.put(
+  "/experience",
+  authMiddleware,
+  addExperienceValidation,
+  addUserExperience
+);
 // @ts-ignore
-router.put("/education/:id", [authMiddleware, addEducationValidation], addUserEducation);// @ts-ignore
-// @ts-ignore
-router.put("/experience/:id", [authMiddleware, addExperienceValidation], addUserExperience);
-// @ts-ignore
-router.post("/create/:id", [authMiddleware, createProfileValidator], createUserProfile);
-
+router.post(
+  "/create",
+  [authMiddleware, createProfileValidator],
+  createUserProfile
+);
 
 export const profileRoutes = router;

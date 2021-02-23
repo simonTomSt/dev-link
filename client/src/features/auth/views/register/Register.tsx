@@ -12,10 +12,11 @@ import React from "react";
 import { ToastContainer } from "react-toastify";
 import { registerUser } from "../../../../store/auth/authActions";
 import { registerValues } from "../../models/formsValues";
+import { useHistory } from "react-router-dom";
 
 export default function Register() {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   return (
     <>
       <AsyncWrapper>
@@ -29,6 +30,7 @@ export default function Register() {
               validationSchema={registerSchema}
               onSubmit={(values: RegisterModel) => {
                 dispatch(registerUser(values));
+                history.push("/posts");
               }}
             >
               <FormikForm>

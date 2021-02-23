@@ -7,7 +7,7 @@ import {
 } from "./asyncModels";
 
 const initialState: StateModel = {
-  isAlert: true,
+  isAlert: false,
   alertType: AlertTypes.Error,
   alertMsg: null,
   isLoading: false,
@@ -25,6 +25,7 @@ export const asyncReducer = (
         ...payload,
         isLoading: false,
         loaderType: LoaderType.Bar,
+        isAlert: true,
       };
     }
     case asyncTypes.REMOVE_ALERT:

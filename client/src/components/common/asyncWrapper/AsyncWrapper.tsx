@@ -3,7 +3,7 @@ import {
   AsyncStateModel,
   LoaderType,
 } from "../../../store/async/asyncModels";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 import { RootState } from "../../../store/configureStore/store";
@@ -14,27 +14,29 @@ export interface AsyncWrapperProps {
   errorMessage?: string;
   loader?: React.ReactNode;
   children?: React.ReactNode;
+  autoClose?: number | false;
 }
 
 export default function AsyncWrapper({
   children,
   errorMessage,
   loader,
+  autoClose = 5000,
 }: AsyncWrapperProps) {
   const { isLoading, loaderType, isAlert, alertType, alertMsg } = useSelector<
     RootState,
     AsyncStateModel
   >((state) => state.async);
 
-  const setErrorMsg = () => {
+  const setErrorMsg = useCallback(() => {
     if (errorMessage) return errorMessage;
     else if (alertMsg) return alertMsg;
     return "Ops, there is an error";
-  };
+  }, [alertMsg, errorMessage]);
 
   useEffect(() => {
     isAlert && alertType === AlertTypes.Error && toast.error(setErrorMsg());
-  }, [isAlert, errorMessage, alertType, setErrorMsg]);
+  }, [isAlert, alertType, setErrorMsg]);
 
   if (loader) {
     return (
@@ -43,7 +45,6 @@ export default function AsyncWrapper({
   } else {
     return (
       <>
-        {console.log(isLoading)}
         {isLoading && loaderType === LoaderType.Spinner ? (
           <div className="centralized">
             <Spinner animation="border" />
@@ -51,7 +52,7 @@ export default function AsyncWrapper({
         ) : (
           children && children
         )}
-        <ToastContainer autoClose={false} />
+        <ToastContainer autoClose={autoClose} />
       </>
     );
   }

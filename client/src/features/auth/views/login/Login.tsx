@@ -5,7 +5,9 @@ import { LoginModel, loginSchema } from "../../models/formsSchemas";
 import AsyncWrapper from "../../../../components/common/asyncWrapper/AsyncWrapper";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
+import { Link } from "react-router-dom";
 import React from "react";
+import { Routes } from "../../../../app/consts/RoutersConsts";
 import { logInUser } from "../../../../store/auth/authActions";
 import { loginValues } from "../../models/formsValues";
 import { useDispatch } from "react-redux";
@@ -66,6 +68,14 @@ export default function Login() {
             </FormikForm>
           </Formik>
         </Card>
+        <p className="text-light text-center">
+          Don't have account?{" "}
+          <Link to={Routes.Register}>
+            <span className="text-warning underline">
+              <u> Register here</u>
+            </span>{" "}
+          </Link>
+        </p>
       </Container>
     </AsyncWrapper>
   );

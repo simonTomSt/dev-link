@@ -47,6 +47,13 @@ export const authReducer = (
         isAuth: false,
       };
     }
+    case authTypes.LOG_OUT_USER: {
+      storageClear(StorageNames.Token);
+      return {
+        ...state,
+        isAuth: false,
+      };
+    }
     default: {
       return state;
     }

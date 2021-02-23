@@ -74,10 +74,9 @@ export const logInUser = ({ email, password }: PayloadModel) => async (
     });
   }
 };
-export function logOutUser(payload: PayloadModel) {
+export function logOutUser() {
   return {
     type: authTypes.LOG_OUT_USER,
-    payload,
   };
 }
 

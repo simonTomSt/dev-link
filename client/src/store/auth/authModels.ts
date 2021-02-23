@@ -30,5 +30,13 @@ export interface ActionFailedAuth {
   type: authTypes.AUTH_FAILED;
   payload: any;
 }
+export interface ActionLogOut {
+  type: authTypes.LOG_OUT_USER;
+  payload: any;
+}
 
-export type AuthActions = ActionAuthUser | ActionFailedAuth | ActionAuthInit;
+export type AuthActions =
+  | ActionAuthUser
+  | ActionFailedAuth
+  | ActionAuthInit
+  | ActionLogOut;

@@ -1,8 +1,9 @@
 export enum authTypes {
   LOG_IN_USER = "LOG_IN_USER",
   LOG_OUT_USER = "LOG_OUT_USER",
-  REGISTER_USER = "REGISTER_USER",
+  AUTH_USER = "AUTH_USER",
   AUTH_FAILED = " AUTH_FAILED",
+  AUTH_INIT = " AUTH_INIT",
 }
 
 export interface authStateModel {
@@ -12,13 +13,17 @@ export interface authStateModel {
 }
 
 export interface AuthPayloadModel {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
 
-export interface ActionLogIn {
-  type: authTypes.LOG_IN_USER;
+export interface ActionAuthInit {
+  type: authTypes.AUTH_INIT;
+  payload: any;
+}
+export interface ActionAuthUser {
+  type: authTypes.AUTH_USER;
   payload: any;
 }
 export interface ActionFailedAuth {
@@ -26,4 +31,4 @@ export interface ActionFailedAuth {
   payload: any;
 }
 
-export type AuthActions = ActionLogIn | ActionFailedAuth;
+export type AuthActions = ActionAuthUser | ActionFailedAuth | ActionAuthInit;

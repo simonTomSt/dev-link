@@ -47,7 +47,10 @@ export default function AsyncWrapper({
       <>
         {isLoading && loaderType === LoaderType.Spinner ? (
           <div className="centralized">
-            <Spinner animation="border" />
+            <Spinner
+              animation="border"
+              className="position-fixed left-50 top-50"
+            />
           </div>
         ) : (
           children && children

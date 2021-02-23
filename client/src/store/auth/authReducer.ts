@@ -3,6 +3,9 @@ import {
   authTypes,
   authStateModel as stateModel,
 } from "./authModels";
+import { storageClear, storageSave } from "../../app/helpers/localStorage";
+
+import { StorageNames } from "../../app/consts/StorageConsts";
 
 const initialState: stateModel = {
   token: localStorage.getItem("token"),
@@ -15,8 +18,8 @@ export const authReducer = (
   { type, payload }: AuthActions
 ) => {
   switch (type) {
-    case authTypes.LOG_IN_USER || authTypes.REGISTER_USER: {
-      localStorage.setItem("token", payload.token);
+    case authTypes.AUTH_USER: {
+      storageSave(StorageNames.Token, payload.respToken);
       return {
         ...state,
         ...payload,
@@ -24,12 +27,24 @@ export const authReducer = (
       };
     }
     case authTypes.AUTH_FAILED: {
-      localStorage.removeItem("token");
+      storageClear(StorageNames.Token);
       return {
         ...state,
         token: null,
         isAuth: false,
         loading: false,
+      };
+    }
+    case authTypes.AUTH_INIT: {
+      if (payload) {
+        return {
+          ...state,
+          isAuth: true,
+        };
+      }
+      return {
+        ...state,
+        isAuth: false,
       };
     }
     default: {

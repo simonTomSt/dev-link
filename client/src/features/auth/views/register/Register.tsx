@@ -1,22 +1,20 @@
 import "../../../../styles/general.css";
 
-import { Alert, Card, Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { ErrorMessage, Field, Formik, Form as FormikForm } from "formik";
 import { RegisterModel, registerSchema } from "../../models/formsSchemas";
-import { connect, useDispatch } from "react-redux";
 
 import AsyncWrapper from "../../../../components/common/asyncWrapper/AsyncWrapper";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import React from "react";
-import { ToastContainer } from "react-toastify";
 import { registerUser } from "../../../../store/auth/authActions";
 import { registerValues } from "../../models/formsValues";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function Register() {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   return (
     <>
       <AsyncWrapper>
@@ -30,7 +28,6 @@ export default function Register() {
               validationSchema={registerSchema}
               onSubmit={(values: RegisterModel) => {
                 dispatch(registerUser(values));
-                history.push("/posts");
               }}
             >
               <FormikForm>

@@ -7,7 +7,7 @@ import React from "react";
 const NavBar = () => {
   return (
     <>
-      <Navbar variant="dark" bg="primary" fixed="top">
+      <Navbar variant="light" bg="light" fixed="top">
         <Container>
           <Navbar.Brand as={NavLink} to="/">
             <CodeSlash size={34} className="font-weight-bold" />

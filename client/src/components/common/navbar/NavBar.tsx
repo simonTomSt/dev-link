@@ -3,6 +3,7 @@ import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
 
 import { NavLink } from "react-router-dom";
 import React from "react";
+import { Routes } from "../../../app/consts/RoutersConsts";
 import { logOutUser } from "../../../store/auth/authActions";
 import { useDispatch } from "react-redux";
 
@@ -28,7 +29,7 @@ const NavBar = () => {
             <Nav.Link as={NavLink} to="/posts">
               Posts
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/my-profile">
+            <Nav.Link as={NavLink} to={Routes.MyProfile}>
               My profile <PersonSquare />
             </Nav.Link>
           </Nav>
@@ -38,7 +39,7 @@ const NavBar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="justify-content-end">
-              <Dropdown.Item as={NavLink} to="/edit-profile">
+              <Dropdown.Item as={NavLink} to={Routes.EditMyProfile}>
                 Edit Profile
               </Dropdown.Item>
               <Dropdown.Item href="#/action-2" onClick={logOut}>

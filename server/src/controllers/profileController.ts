@@ -12,10 +12,11 @@ export const getUserProfile = async (
 ) => {
   try {
     const profile = await Profile.findOne({
-      user: req.params.id,
+      user: req.body.user.id,
     }).populate("user", ["name", "avatar"]);
     if (!profile)
       return res.status(400).json({ msg: "There is no profile for this user" });
+    console.log(profile);
     res.json(profile);
   } catch (err) {
     console.log(err);
@@ -143,6 +144,7 @@ export const addUserEducation = async (
   !errors.isEmpty() && res.status(400).json({ errors: errors.array() });
 
   const {
+    _id,
     school,
     degree,
     fieldOfStudy,
@@ -165,6 +167,15 @@ export const addUserEducation = async (
     const profile = await Profile.findOne({ user: req.body.user.id });
     if (!profile)
       return res.status(400).json({ msg: "There is no profile for this user" });
+    console.log(_id);
+    //@ts-ignore
+    let educToUpdate = profile?.education?.find((educ) => educ.id === _id);
+
+    if (educToUpdate) {
+      educToUpdate = newEdu;
+      await profile.save();
+      return res.json(profile);
+    }
 
     profile?.education?.unshift(newEdu);
     await profile.save();
@@ -183,15 +194,16 @@ export const deleteUserEducation = async (
     const profile = await Profile.findOne({ user: req.body.user.id });
     if (!profile)
       return res.status(400).json({ msg: "There is no profile for this user" });
-    const removeIndex = profile?.education
+    const removeIndex = profile?.education?.findIndex(
       // @ts-ignore
-      ?.map((item) => item.id)
-      ?.indexOf(req.params.id);
+      (item) => item._id === req.params.id
+    );
 
     if (!removeIndex)
       return res
         .status(400)
         .json({ msg: "There is no education for this user profile" });
+
     profile.education?.splice(removeIndex, 1);
 
     await profile.save();

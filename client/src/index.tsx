@@ -5,7 +5,13 @@ import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { StorageNames } from "./app/consts/StorageConsts";
+import { initAuth } from "./store/auth/authActions";
+import { storageGet } from "./app/helpers/localStorage";
 import { store } from "./store/configureStore/store";
+
+const token = storageGet(StorageNames.Token);
+store.dispatch<any>(initAuth(token));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +24,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

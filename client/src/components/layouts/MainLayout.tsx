@@ -9,7 +9,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <NavBar />
-      {children}
+      <div className="content-container mx-auto">{children}</div>
     </>
   );
 }

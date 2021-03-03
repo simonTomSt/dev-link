@@ -1,7 +1,8 @@
-import { LoaderType } from "../../../store/async/asyncModels";
+import { AsyncStateModel, LoaderType } from "../../../store/async/asyncModels";
+
 import React from "react";
+import { RootState } from "../../../store/configureStore/store";
 import TopBarProgress from "react-topbar-progress-indicator";
-import { asyncStore } from "../../../store/async/asyncReducer";
 import { useSelector } from "react-redux";
 
 TopBarProgress.config({
@@ -14,7 +15,9 @@ TopBarProgress.config({
 });
 
 export const TopBarLoader = () => {
-  const { isLoading, loaderType } = useSelector(asyncStore);
+  const { isLoading, loaderType } = useSelector<RootState, AsyncStateModel>(
+    (state) => state.async
+  );
   return (
     <div>
       {isLoading && loaderType === LoaderType.Bar && <TopBarProgress />}

@@ -1,4 +1,4 @@
-import { Button, Card, Container, Form } from "react-bootstrap";
+import { Button, Card, Container, Form, Row } from "react-bootstrap";
 import {
   EducSchemaModel,
   ProfileModel,
@@ -29,8 +29,8 @@ export default function EditProfile() {
   );
 
   useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
+    !profile && dispatch(getUserProfile());
+  }, [profile, dispatch]);
 
   return (
     <AsyncWrapper>
@@ -184,7 +184,7 @@ export default function EditProfile() {
                   type="text"
                   rows={6}
                   placeholder="Describe yourself"
-                  as={"textarea"}
+                  as={Form.Control}
                 />
 
                 <ErrorMessage
@@ -194,13 +194,22 @@ export default function EditProfile() {
                 />
               </Form.Group>
               <Form.Group>
-                <Button
-                  as={Link}
-                  to={Routes.EditMyEduc}
-                  variant="outline-success"
-                >
-                  Change your education
-                </Button>
+                <Row>
+                  <Button
+                    as={Link}
+                    to={Routes.EditMyEduc}
+                    variant="outline-success ml-2"
+                  >
+                    Change your education
+                  </Button>
+                  <Button
+                    as={Link}
+                    to={Routes.EditMyExp}
+                    variant="outline-danger ml-2"
+                  >
+                    Change your experience
+                  </Button>
+                </Row>
               </Form.Group>
               <Button variant="primary" type="submit">
                 Confirm

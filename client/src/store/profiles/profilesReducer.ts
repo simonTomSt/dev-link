@@ -39,6 +39,18 @@ export const profilesReducer = (
         profile: payload,
       };
     }
+    case ProfilesTypes.CREATE_EXPERIENCE: {
+      return {
+        ...state,
+        profile: payload,
+      };
+    }
+    case ProfilesTypes.DELETE_EXPERIENCE: {
+      return {
+        ...state,
+        profile: payload,
+      };
+    }
     default:
       return state;
   }

@@ -25,3 +25,17 @@ export const educationSchema = Yup.object({
 export type EducSchemaModel = Yup.InferType<typeof educationSchema>;
 
 export type EducationModel = EducSchemaModel & { _id: string };
+
+export const experienceSchema = Yup.object({
+  _id: Yup.string().optional(),
+  title: Yup.string().required(),
+  company: Yup.string().required(),
+  location: Yup.string().required(),
+  from: Yup.date().required(),
+  to: Yup.date(),
+  current: Yup.boolean(),
+  description: Yup.string(),
+});
+export type ExperienceSchema = Yup.InferType<typeof experienceSchema>;
+
+export type ExpModel = ExperienceSchema & { _id: string };

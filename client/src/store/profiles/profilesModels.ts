@@ -1,15 +1,10 @@
-import { EducationModel } from "./../../features/my-profile/models/formSchema";
-import { ProfileDoc } from "../../../../server/src/models/Profile";
-import { ProfileModel } from "../../features/my-profile/models/formSchema";
-import { UserDoc } from "../../../../server/src/models/User";
+import {
+  EducationModel,
+  ExpModel,
+} from "./../../features/my-profile/models/formSchema";
 
-// export interface UserProfileModel {
-//     user: {
-//         avatar: string;
-//         name: string;
-//         _id: string;
-//     }
-// }
+import { ProfileDoc } from "../../../../server/src/models/Profile";
+import { UserDoc } from "../../../../server/src/models/User";
 
 export interface ProfileRespModel extends Omit<ProfileDoc, "user"> {
   user: {
@@ -18,6 +13,7 @@ export interface ProfileRespModel extends Omit<ProfileDoc, "user"> {
     _id: string;
   };
   education: EducationModel[];
+  experience: ExpModel[];
 }
 
 export interface ProfilesStateModel {
@@ -32,6 +28,8 @@ export enum ProfilesTypes {
   CREATE_PROFILE = "CREATE_PROFILE",
   CREATE_EDUCATION = "CREATE_EDUCATION",
   DELETE_EDUCATION = "DELETE_EDUCATION",
+  CREATE_EXPERIENCE = "CREATE_EXPERIENCE",
+  DELETE_EXPERIENCE = "DELETE_EXPERIENCE",
 }
 
 export interface GetProfileAction {
@@ -52,9 +50,19 @@ export interface DeleteEducAction {
   type: ProfilesTypes.DELETE_EDUCATION;
   payload: ProfileDoc;
 }
+export interface CreatExpAction {
+  type: ProfilesTypes.CREATE_EXPERIENCE;
+  payload: ProfileDoc;
+}
+export interface DeleteExpAction {
+  type: ProfilesTypes.DELETE_EXPERIENCE;
+  payload: ProfileDoc;
+}
 
 export type ProfileActions =
   | GetProfileAction
   | CreateProfileAction
   | CreateEducAction
-  | DeleteEducAction;
+  | DeleteEducAction
+  | CreatExpAction
+  | DeleteExpAction;

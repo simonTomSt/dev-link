@@ -16,7 +16,6 @@ export const getUserProfile = async (
     }).populate("user", ["name", "avatar"]);
     if (!profile)
       return res.status(400).json({ msg: "There is no profile for this user" });
-    console.log(profile);
     res.json(profile);
   } catch (err) {
     console.log(err);
@@ -92,13 +91,30 @@ export const addUserExperience = async (
   const errors = validationResult(req);
   !errors.isEmpty() && res.status(400).json({ errors: errors.array() });
 
-  const { title, company, location, from, to, current, description } = req.body;
+  const {
+    _id,
+    title,
+    company,
+    location,
+    from,
+    to,
+    current,
+    description,
+  } = req.body;
   const newExp = { title, company, location, from, to, current, description };
 
   try {
     const profile = await Profile.findOne({ user: req.body.user.id });
     if (!profile)
       return res.status(400).json({ msg: "There is no profile for this user" });
+
+    //@ts-ignore
+    let educToUpdate = profile?.experience?.find((exp) => exp.id === _id);
+    if (educToUpdate) {
+      educToUpdate = newExp;
+      await profile.save();
+      return res.json(profile);
+    }
 
     profile?.experience?.unshift(newExp);
     await profile.save();
@@ -117,19 +133,20 @@ export const deleteUserExperience = async (
     const profile = await Profile.findOne({ user: req.body.user.id });
     if (!profile)
       return res.status(400).json({ msg: "There is no profile for this user" });
-    const removeIndex = profile?.experience
+    const removeIndex = profile?.experience?.findIndex(
       // @ts-ignore
-      ?.map((item) => item.id)
-      ?.indexOf(req.body.user.id);
+      (item) => item._id === req.params.id
+    );
 
     if (!removeIndex)
       return res
         .status(400)
         .json({ msg: "There is no experience for this user profile" });
+
     profile.experience?.splice(removeIndex, 1);
 
     await profile.save();
-    res.json({ msg: "Experience removed" });
+    res.json(profile);
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server error");
@@ -207,7 +224,7 @@ export const deleteUserEducation = async (
     profile.education?.splice(removeIndex, 1);
 
     await profile.save();
-    res.json({ msg: "Education removed" });
+    res.json(profile);
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server error");

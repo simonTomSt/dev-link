@@ -1,6 +1,11 @@
 import * as Yup from "yup";
 
-import { EducSchemaModel, ProfileModel } from "./formSchema";
+import {
+  EducSchemaModel,
+  ExpModel,
+  ExperienceSchema,
+  ProfileModel,
+} from "./formSchema";
 import {
   ProfileRespModel,
   ProfilesStateModel,
@@ -33,5 +38,19 @@ export const educationValues = (
     from: education?.from ? education.from : new Date(),
     to: education?.to ? education.to : new Date(),
     current: education?.current ? education.current : true,
+  };
+};
+export const experienceValues = (
+  experience?: ExperienceSchema
+): ExperienceSchema => {
+  return {
+    _id: experience?._id && experience._id,
+    title: experience?.title ? experience.title : "",
+    company: experience?.company ? experience.company : "",
+    location: experience?.location ? experience.location : "",
+    from: experience?.from ? experience.from : new Date(),
+    to: experience?.to ? experience.to : new Date(),
+    current: experience?.current ? experience.current : true,
+    description: experience?.description ? experience.description : "",
   };
 };

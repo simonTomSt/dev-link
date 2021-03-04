@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import EditEducation from "./features/my-profile/views/editProfile/EditEducation";
+import EditExperience from "./features/my-profile/views/editProfile/EditExperience";
 import EditProfile from "./features/my-profile/views/editProfile/EditProfile";
 import Login from "./features/auth/views/login/Login";
 import MainLayout from "./components/layouts/MainLayout";
@@ -67,6 +68,12 @@ const App = () => {
             <PrivateRoute
               path={Routes.EditMyEduc}
               component={EditEducation}
+              isAuth={isAuth}
+              redirectPath={Routes.Login}
+            />
+            <PrivateRoute
+              path={Routes.EditMyExp}
+              component={EditExperience}
               isAuth={isAuth}
               redirectPath={Routes.Login}
             />

@@ -22,11 +22,11 @@ const router = express.Router();
 
 router.get("/", getAllProfiles);
 router.get("/github/:name", getUserGithub);
-router.get("/user/:id", getUserProfile);
+router.get("/user", authMiddleware, getUserProfile);
 
 router.delete("/delete", authMiddleware, deleteUserProfile);
-router.delete("/experience/", authMiddleware, deleteUserExperience);
-router.delete("/education/", authMiddleware, deleteUserEducation);
+router.delete("/experience/:id", authMiddleware, deleteUserExperience);
+router.delete("/education/:id", authMiddleware, deleteUserEducation);
 
 router.put(
   "/education",

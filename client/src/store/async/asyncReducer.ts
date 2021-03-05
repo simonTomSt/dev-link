@@ -52,5 +52,3 @@ export const asyncReducer = (
       return state;
   }
 };
-
-export const asyncStore = () => initialState;

@@ -47,15 +47,12 @@ export default function AsyncWrapper({
       <>
         {isLoading && loaderType === LoaderType.Spinner ? (
           <div className="centralized">
-            <Spinner
-              animation="border"
-              className="position-fixed left-50 top-50"
-            />
+            <Spinner animation="border" variant={"warning"} />
           </div>
         ) : (
           children && children
         )}
-        <ToastContainer autoClose={autoClose} />
+        <ToastContainer autoClose={autoClose} className="mt-5" />
       </>
     );
   }

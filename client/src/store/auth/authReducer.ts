@@ -9,7 +9,7 @@ import { StorageNames } from "../../app/consts/StorageConsts";
 
 const initialState: stateModel = {
   token: localStorage.getItem("token"),
-  isAuth: null,
+  isAuth: true,
   user: null,
 };
 
@@ -35,6 +35,7 @@ export const authReducer = (
         loading: false,
       };
     }
+
     case authTypes.AUTH_INIT: {
       if (payload) {
         return {
@@ -47,13 +48,21 @@ export const authReducer = (
         isAuth: false,
       };
     }
+    case authTypes.GET_ME: {
+      return {
+        ...state,
+        user: payload,
+      };
+    }
     case authTypes.LOG_OUT_USER: {
       storageClear(StorageNames.Token);
       return {
         ...state,
+        token: null,
         isAuth: false,
       };
     }
+
     default: {
       return state;
     }

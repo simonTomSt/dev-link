@@ -1,14 +1,10 @@
-import {
-  EducSchemaModel,
-  ExpModel,
-  ExperienceSchema,
-} from "../../models/formSchema";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AsyncWrapper from "../../../../components/common/asyncWrapper/AsyncWrapper";
 import { Container } from "react-bootstrap";
 import EditExpForm from "./EditExpForm";
+import { ExperienceSchema } from "../../models/formSchema";
 import { ProfilesStateModel } from "../../../../store/profiles/profilesModels";
 import { RootState } from "../../../../store/configureStore/store";
 import { getUserProfile } from "../../../../store/profiles/profilesActions";

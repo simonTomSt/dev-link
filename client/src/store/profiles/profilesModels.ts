@@ -19,17 +19,19 @@ export interface ProfileRespModel extends Omit<ProfileDoc, "user"> {
 export interface ProfilesStateModel {
   profile?: ProfileRespModel;
   profiles?: ProfileRespModel[];
-  repos?: [];
+  repos?: any[];
   user?: UserDoc;
 }
 
 export enum ProfilesTypes {
   GET_PROFILE = "GET_PROFILE",
   CREATE_PROFILE = "CREATE_PROFILE",
+  DELETE_PROFILE = "DELETE_PROFILE",
   CREATE_EDUCATION = "CREATE_EDUCATION",
   DELETE_EDUCATION = "DELETE_EDUCATION",
   CREATE_EXPERIENCE = "CREATE_EXPERIENCE",
   DELETE_EXPERIENCE = "DELETE_EXPERIENCE",
+  GET_GITHUB = "GET_GITHUB",
 }
 
 export interface GetProfileAction {
@@ -39,6 +41,10 @@ export interface GetProfileAction {
 
 export interface CreateProfileAction {
   type: ProfilesTypes.CREATE_PROFILE;
+  payload: ProfileDoc;
+}
+export interface DeleteProfileAction {
+  type: ProfilesTypes.DELETE_PROFILE;
   payload: ProfileDoc;
 }
 
@@ -59,10 +65,17 @@ export interface DeleteExpAction {
   payload: ProfileDoc;
 }
 
+export interface GithubAction {
+  type: ProfilesTypes.GET_GITHUB;
+  payload: ProfileDoc;
+}
+
 export type ProfileActions =
   | GetProfileAction
   | CreateProfileAction
+  | DeleteProfileAction
   | CreateEducAction
   | DeleteEducAction
   | CreatExpAction
-  | DeleteExpAction;
+  | DeleteExpAction
+  | GithubAction;

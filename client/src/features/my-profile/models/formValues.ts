@@ -1,17 +1,6 @@
-import * as Yup from "yup";
+import { EducSchemaModel, ExperienceSchema, ProfileModel } from "./formSchema";
 
-import {
-  EducSchemaModel,
-  ExpModel,
-  ExperienceSchema,
-  ProfileModel,
-} from "./formSchema";
-import {
-  ProfileRespModel,
-  ProfilesStateModel,
-} from "../../../store/profiles/profilesModels";
-
-import Moment from "react-moment";
+import { ProfileRespModel } from "../../../store/profiles/profilesModels";
 
 export const profileValues = (profile?: ProfileRespModel): ProfileModel => {
   return {

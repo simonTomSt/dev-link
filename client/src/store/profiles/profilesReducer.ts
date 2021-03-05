@@ -27,6 +27,12 @@ export const profilesReducer = (
         profile: payload,
       };
     }
+    case ProfilesTypes.DELETE_PROFILE: {
+      return {
+        ...state,
+        profile: null,
+      };
+    }
     case ProfilesTypes.CREATE_EDUCATION: {
       return {
         ...state,
@@ -49,6 +55,12 @@ export const profilesReducer = (
       return {
         ...state,
         profile: payload,
+      };
+    }
+    case ProfilesTypes.GET_GITHUB: {
+      return {
+        ...state,
+        repos: payload,
       };
     }
     default:

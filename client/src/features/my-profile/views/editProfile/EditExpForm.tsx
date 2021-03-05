@@ -1,23 +1,15 @@
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
-import {
-  EducSchemaModel,
-  ExpModel,
-  ExperienceSchema,
-  educationSchema,
-  experienceSchema,
-} from "../../models/formSchema";
 import { ErrorMessage, Field, Formik, Form as FormikForm } from "formik";
-import React, { useEffect, useState } from "react";
+import { ExperienceSchema, experienceSchema } from "../../models/formSchema";
+import React, { useState } from "react";
 import {
-  addEducation,
   addExperience,
-  deleteEducation,
   deleteExperience,
   getUserProfile,
 } from "../../../../store/profiles/profilesActions";
-import { educationValues, experienceValues } from "../../models/formValues";
 
 import DatePicker from "react-datepicker";
+import { experienceValues } from "../../models/formValues";
 import { useDispatch } from "react-redux";
 
 export interface EditExpFormProps {
@@ -33,9 +25,6 @@ const EditExpForm = ({ experience }: EditExpFormProps) => {
     experience?._id && dispatch(deleteExperience(experience._id));
     dispatch(getUserProfile());
   };
-  useEffect(() => {
-    experience?.current && setIsCurrent(experience.current);
-  }, [experience]);
 
   return (
     <Card className="mb-4 p-3 ">

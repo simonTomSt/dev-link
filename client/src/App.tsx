@@ -2,11 +2,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
+import DevelopersPage from "./features/developers/views/developersPage/DevelopersPage";
 import EditEducation from "./features/my-profile/views/editProfile/EditEducation";
 import EditExperience from "./features/my-profile/views/editProfile/EditExperience";
 import EditProfile from "./features/my-profile/views/editProfile/EditProfile";
 import Login from "./features/auth/views/login/Login";
 import MainLayout from "./components/layouts/MainLayout";
+import PostsPage from "./features/posts/views/postsPage/PostsPage";
 import PrivateRoute from "./app/router/PrivateRoute";
 import ProfilePage from "./features/my-profile/views/profilePage/ProfilePage";
 import PublicRoute from "./app/router/PublicRoute";
@@ -45,7 +47,14 @@ const App = () => {
           // restricted={true}
         />
       </Switch>
-      <Route path={[Routes.Posts, Routes.MyProfile, Routes.EditMyProfile]}>
+      <Route
+        path={[
+          Routes.Developers,
+          Routes.Posts,
+          Routes.MyProfile,
+          Routes.EditMyProfile,
+        ]}
+      >
         <MainLayout>
           <Switch>
             <PrivateRoute
@@ -74,6 +83,18 @@ const App = () => {
             <PrivateRoute
               path={Routes.EditMyExp}
               component={EditExperience}
+              isAuth={isAuth}
+              redirectPath={Routes.Login}
+            />
+            <PrivateRoute
+              path={Routes.Posts}
+              component={PostsPage}
+              isAuth={isAuth}
+              redirectPath={Routes.Login}
+            />
+            <PrivateRoute
+              path={Routes.Developers}
+              component={DevelopersPage}
               isAuth={isAuth}
               redirectPath={Routes.Login}
             />

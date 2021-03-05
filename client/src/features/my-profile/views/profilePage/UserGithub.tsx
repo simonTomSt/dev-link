@@ -6,17 +6,19 @@ interface Props {
   repos?: any[];
 }
 export default function UserGithub({ repos }: Props) {
-  return (
-    <Card className="mb-4">
-      <Card.Body>
-        <ListGroup>
-          {repos?.map(({ id, name, html_url }) => (
-            <ListGroup.Item as="a" href={html_url} key={id} target="_blank">
-              {name}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </Card.Body>
-    </Card>
-  );
+  if (repos && repos.length > 0)
+    return (
+      <Card className="mb-4">
+        <Card.Body>
+          <ListGroup>
+            {repos?.map(({ id, name, html_url }) => (
+              <ListGroup.Item as="a" href={html_url} key={id} target="_blank">
+                {name}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Card.Body>
+      </Card>
+    );
+  return null;
 }

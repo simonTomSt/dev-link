@@ -15,6 +15,12 @@ export const profilesReducer = (
   { type, payload }: Actions
 ) => {
   switch (type) {
+    case ProfilesTypes.GET_PROFILES: {
+      return {
+        ...state,
+        profiles: payload,
+      };
+    }
     case ProfilesTypes.GET_PROFILE: {
       return {
         ...state,

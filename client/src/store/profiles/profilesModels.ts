@@ -24,6 +24,7 @@ export interface ProfilesStateModel {
 }
 
 export enum ProfilesTypes {
+  GET_PROFILES = "GET_PROFILES",
   GET_PROFILE = "GET_PROFILE",
   CREATE_PROFILE = "CREATE_PROFILE",
   DELETE_PROFILE = "DELETE_PROFILE",
@@ -69,6 +70,10 @@ export interface GithubAction {
   type: ProfilesTypes.GET_GITHUB;
   payload: ProfileDoc;
 }
+export interface GetProfilesAction {
+  type: ProfilesTypes.GET_PROFILES;
+  payload: ProfileDoc;
+}
 
 export type ProfileActions =
   | GetProfileAction
@@ -78,4 +83,5 @@ export type ProfileActions =
   | DeleteEducAction
   | CreatExpAction
   | DeleteExpAction
-  | GithubAction;
+  | GithubAction
+  | GetProfilesAction;

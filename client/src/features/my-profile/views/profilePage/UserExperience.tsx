@@ -11,6 +11,7 @@ export default function UserExperience({ experience }: Props) {
     <Card className="mt-4">
       <Card.Body>
         <h2 className="mb-4">My experience: </h2>
+        {experience.length <= 0 && <p>There is no experience added</p>}
         <Accordion>
           {" "}
           {experience.map((exp) => (

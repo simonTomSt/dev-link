@@ -13,6 +13,21 @@ import { ProfilesTypes } from "./profilesModels";
 import axios from "axios";
 import { axiosConfig } from "./../../app/config/axiosConfig";
 
+export const getAllProfiles = () => async (dispatch: Dispatch) => {
+  dispatch(setSpinnerLoading());
+  try {
+    const res = await axios.get("/api/profiles", axiosConfig);
+    dispatch({
+      type: ProfilesTypes.GET_PROFILES,
+      payload: res.data,
+    });
+    dispatch(stopLoading());
+  } catch (error) {
+    dispatch(setError("Failed to load profiles"));
+    dispatch(stopLoading());
+  }
+};
+
 export const getUserProfile = () => async (dispatch: Dispatch) => {
   dispatch(setSpinnerLoading());
   try {

@@ -11,6 +11,7 @@ export default function UserEducation({ education }: Props) {
     <Card className="mt-4 mb-4">
       <Card.Body>
         <h2 className="mb-4">My education: </h2>
+        {education.length <= 0 && <p>There is no education added</p>}
         <Accordion>
           {" "}
           {education.map((educ) => (

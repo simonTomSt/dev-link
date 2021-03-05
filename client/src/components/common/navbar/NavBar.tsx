@@ -23,10 +23,10 @@ const NavBar = () => {
             DevLink
           </Navbar.Brand>
           <Nav className="m-auto">
-            <Nav.Link as={NavLink} to="/developers">
+            <Nav.Link as={NavLink} to={Routes.Developers}>
               Developers
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/posts">
+            <Nav.Link as={NavLink} to={Routes.Posts}>
               Posts
             </Nav.Link>
             <Nav.Link as={NavLink} to={Routes.MyProfile}>

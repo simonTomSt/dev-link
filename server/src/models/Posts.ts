@@ -4,6 +4,7 @@ const PostSchema = createSchema({
   user: Type.objectId({ required: true, ref: "User" }),
   text: Type.string({ required: true }),
   name: Type.string(),
+  userName: Type.string(),
   avatar: Type.string(),
   likes: Type.array().of({
     user: Type.objectId({ ref: "User" }),

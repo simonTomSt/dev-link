@@ -8,6 +8,7 @@ import EditExperience from "./features/my-profile/views/editProfile/EditExperien
 import EditProfile from "./features/my-profile/views/editProfile/EditProfile";
 import Login from "./features/auth/views/login/Login";
 import MainLayout from "./components/layouts/MainLayout";
+import MyPosts from "./features/posts/views/myPosts/MyPosts";
 import PostsPage from "./features/posts/views/postsPage/PostsPage";
 import PrivateRoute from "./app/router/PrivateRoute";
 import ProfilePage from "./features/my-profile/views/profilePage/ProfilePage";
@@ -53,6 +54,7 @@ const App = () => {
           Routes.Posts,
           Routes.MyProfile,
           Routes.EditMyProfile,
+          Routes.MyPosts,
         ]}
       >
         <MainLayout>
@@ -95,6 +97,12 @@ const App = () => {
             <PrivateRoute
               path={Routes.Developers}
               component={DevelopersPage}
+              isAuth={isAuth}
+              redirectPath={Routes.Login}
+            />
+            <PrivateRoute
+              path={Routes.MyPosts}
+              component={MyPosts}
               isAuth={isAuth}
               redirectPath={Routes.Login}
             />

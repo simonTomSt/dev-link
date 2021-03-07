@@ -1,7 +1,7 @@
 import { CodeSlash, Gear, PersonSquare } from "react-bootstrap-icons";
-import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
+import { Container, Dropdown, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
 
-import { NavLink } from "react-router-dom";
 import React from "react";
 import { Routes } from "../../../app/consts/RoutersConsts";
 import { logOutUser } from "../../../store/auth/authActions";
@@ -26,9 +26,16 @@ const NavBar = () => {
             <Nav.Link as={NavLink} to={Routes.Developers}>
               Developers
             </Nav.Link>
-            <Nav.Link as={NavLink} to={Routes.Posts}>
-              Posts
-            </Nav.Link>
+
+            <NavDropdown title="Posts" id="nav-dropdown">
+              <NavDropdown.Item as={NavLink} to={Routes.Posts}>
+                All posts
+              </NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to={Routes.MyPosts}>
+                My posts
+              </NavDropdown.Item>
+            </NavDropdown>
+
             <Nav.Link as={NavLink} to={Routes.MyProfile}>
               My profile <PersonSquare />
             </Nav.Link>

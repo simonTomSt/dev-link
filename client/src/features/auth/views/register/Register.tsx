@@ -86,7 +86,7 @@ export default function Register() {
                   />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                  Submit
+                  Register
                 </Button>
               </FormikForm>
             </Formik>

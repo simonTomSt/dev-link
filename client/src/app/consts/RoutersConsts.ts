@@ -3,6 +3,7 @@ export enum Routes {
   Login = "/login",
   Register = "/register",
   Posts = "/posts",
+  MyPosts = "/my-posts",
   Developers = "/developers",
   MyProfile = "/my-profile",
   EditMyProfile = "/my-profile/edit",

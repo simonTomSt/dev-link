@@ -29,3 +29,15 @@ body {
   right: 15px;
   top: 0px;
 }
+.post-actions {
+  position: absolute;
+  right: 35px;
+  bottom: 7px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.underlined {
+  text-decoration: underline;
+}

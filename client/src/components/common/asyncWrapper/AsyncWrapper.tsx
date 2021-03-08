@@ -5,10 +5,11 @@ import {
 } from "../../../store/async/asyncModels";
 import React, { useCallback, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../../store/configureStore/store";
 import { Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { clearError } from "../../../store/async/asyncActions";
 
 export interface AsyncWrapperProps {
   errorMessage?: string;
@@ -28,6 +29,7 @@ export default function AsyncWrapper({
     AsyncStateModel
   >((state) => state.async);
 
+  const dispatch = useDispatch();
   const setErrorMsg = useCallback(() => {
     if (errorMessage) return errorMessage;
     else if (alertMsg) return alertMsg;
@@ -37,6 +39,10 @@ export default function AsyncWrapper({
   useEffect(() => {
     isAlert && alertType === AlertTypes.Error && toast.error(setErrorMsg());
   }, [isAlert, alertType, setErrorMsg]);
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   if (loader) {
     return (

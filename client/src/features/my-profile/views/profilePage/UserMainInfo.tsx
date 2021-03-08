@@ -1,4 +1,5 @@
 import { Card, Col, Row } from "react-bootstrap";
+import { Facebook, Instagram, Twitter } from "react-bootstrap-icons";
 
 import { ProfileRespModel } from "../../../../store/profiles/profilesModels";
 import React from "react";
@@ -63,9 +64,22 @@ export default function UserMainInfo({ info }: Props) {
                 Social:{" "}
               </span>
               {!social && "not added"}
-              {social?.facebook}
-              {social?.twitter}
-              {social?.instagram}
+
+              {social?.facebook && (
+                <p>
+                  <Facebook /> {social?.facebook}
+                </p>
+              )}
+              {social?.twitter && (
+                <p>
+                  <Twitter /> {social?.twitter}
+                </p>
+              )}
+              {social?.instagram && (
+                <p>
+                  <Instagram /> {social?.instagram}
+                </p>
+              )}
             </Col>
           </Row>
         </Card.Body>

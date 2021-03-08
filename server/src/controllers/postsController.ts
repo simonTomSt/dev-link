@@ -154,6 +154,8 @@ export const commentPost = async (
     if (!user)
       return res.status(404).json({ msg: "There is no user with such id" });
 
+    console.log(user.name);
+
     const newComment = ({
       text: req.body.text,
       name: user.name,

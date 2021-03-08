@@ -11,6 +11,7 @@ const PostSchema = createSchema({
   }),
   comments: Type.array().of({
     user: Type.objectId({ ref: "User" }),
+    name: Type.string(),
     text: Type.string({ required: true }),
     avatar: Type.string(),
     date: Type.date({ default: Date.now }),

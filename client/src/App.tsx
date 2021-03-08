@@ -18,6 +18,7 @@ import Register from "./features/auth/views/register/Register";
 import { RootState } from "./store/configureStore/store";
 import { Route } from "react-router";
 import { Routes } from "./app/consts/RoutersConsts";
+import SinglePost from "./features/posts/views/postsPage/SinglePost";
 import Switch from "react-bootstrap/esm/Switch";
 import { TopBarLoader } from "./components/common/loaders/TopBarLoader";
 import { authStateModel } from "./store/auth/authModels";
@@ -55,6 +56,7 @@ const App = () => {
           Routes.MyProfile,
           Routes.EditMyProfile,
           Routes.MyPosts,
+          `${Routes.Post}/:id`,
         ]}
       >
         <MainLayout>
@@ -103,6 +105,12 @@ const App = () => {
             <PrivateRoute
               path={Routes.MyPosts}
               component={MyPosts}
+              isAuth={isAuth}
+              redirectPath={Routes.Login}
+            />
+            <PrivateRoute
+              path={`${Routes.Post}/:id`}
+              component={SinglePost}
               isAuth={isAuth}
               redirectPath={Routes.Login}
             />

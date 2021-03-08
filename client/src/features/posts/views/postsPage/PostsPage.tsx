@@ -8,6 +8,7 @@ import PostBox from "../postBox/PostBox";
 import { PostsStateModel } from "../../../../store/posts/postsModels";
 import { RootState } from "../../../../store/configureStore/store";
 import { getAllPosts } from "../../../../store/posts/postsActions";
+import { getUserProfile } from "../../../../store/profiles/profilesActions";
 
 export default function PostsPage() {
   const dispatch = useDispatch();
@@ -16,12 +17,13 @@ export default function PostsPage() {
   );
   useEffect(() => {
     dispatch(getAllPosts());
+    dispatch(getUserProfile());
   }, [dispatch]);
   return (
     <Container>
       <CreatePost />
       <AsyncWrapper>
-        {posts.map((post) => (
+        {posts?.map((post) => (
           <PostBox post={post} key={post._id} />
         ))}
       </AsyncWrapper>

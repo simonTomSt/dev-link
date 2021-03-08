@@ -7,6 +7,7 @@ import {
 const initialState: PostsStateModel = {
   posts: [],
   myPosts: [],
+  single: undefined,
 };
 
 export const postsReducer = (
@@ -23,6 +24,22 @@ export const postsReducer = (
     case PostsTypes.GET_MY_POSTS: {
       return { ...state, myPosts: payload };
     }
+    case PostsTypes.COMMENT_POST: {
+      return { ...state };
+    }
+    case PostsTypes.DELETE_COMMENT: {
+      return { ...state };
+    }
+    case PostsTypes.LIKE_POST: {
+      return { ...state };
+    }
+    case PostsTypes.UNLIKE_POST: {
+      return { ...state };
+    }
+    case PostsTypes.GET_SINGLE_POST: {
+      return { ...state, single: payload };
+    }
+
     default:
       return state;
   }

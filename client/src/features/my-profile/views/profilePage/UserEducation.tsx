@@ -1,6 +1,7 @@
 import { Accordion, Button, Card, Col, Row } from "react-bootstrap";
 
 import { EducationModel } from "../../models/formSchema";
+import Moment from "react-moment";
 import React from "react";
 
 interface Props {
@@ -43,7 +44,12 @@ export default function UserEducation({ education }: Props) {
                     <Col md={5}>
                       <p>
                         <span className="font-weight-bold mr-2">Period: </span>{" "}
-                        {educ.from} - {educ.current ? "current" : educ.to}
+                        <Moment date={educ.from} format="DD/MM/YYYY" /> -{" "}
+                        {educ.current ? (
+                          "current"
+                        ) : (
+                          <Moment date={educ.to} format="DD/MM/YYYY" />
+                        )}
                       </p>
                     </Col>
                   </Row>

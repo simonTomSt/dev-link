@@ -3,6 +3,7 @@ import { PostDoc } from "./../../../../server/src/models/Posts";
 export interface PostsStateModel {
   posts: PostDoc[];
   myPosts: PostDoc[];
+  single?: PostDoc;
 }
 
 export enum PostsTypes {
@@ -19,15 +20,51 @@ export enum PostsTypes {
 
 export interface GetPostsAction {
   type: PostsTypes.GET_POSTS;
-  payload: any;
+  payload: PostDoc[];
 }
 export interface CreatePostAction {
   type: PostsTypes.CREATE_POST;
-  payload: any;
+  payload: PostDoc[];
 }
 export interface GetMyPostAction {
   type: PostsTypes.GET_MY_POSTS;
-  payload: any;
+  payload: PostDoc[];
+}
+export interface GetMyPostAction {
+  type: PostsTypes.GET_MY_POSTS;
+  payload: PostDoc[];
+}
+export interface CommentPostAction {
+  type: PostsTypes.COMMENT_POST;
+  payload: PostDoc[];
+}
+export interface LikePostAction {
+  type: PostsTypes.LIKE_POST;
+  payload: PostDoc[];
+}
+export interface UnLikePostAction {
+  type: PostsTypes.UNLIKE_POST;
+  payload: PostDoc[];
+}
+export interface GetSinglePost {
+  type: PostsTypes.GET_SINGLE_POST;
+  payload: PostDoc;
+}
+export interface GetSinglePost {
+  type: PostsTypes.GET_SINGLE_POST;
+  payload: PostDoc;
+}
+export interface DeleteComment {
+  type: PostsTypes.DELETE_COMMENT;
+  payload: PostDoc;
 }
 
-export type PostsActions = GetPostsAction | CreatePostAction | GetMyPostAction;
+export type PostsActions =
+  | GetPostsAction
+  | CreatePostAction
+  | GetMyPostAction
+  | CommentPostAction
+  | LikePostAction
+  | UnLikePostAction
+  | GetSinglePost
+  | DeleteComment;

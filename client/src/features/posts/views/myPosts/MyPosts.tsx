@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AsyncWrapper from "../../../../components/common/asyncWrapper/AsyncWrapper";
 import { Container } from "react-bootstrap";
-import CreatePost from "../createPost/CreatePost";
 import PostBox from "../postBox/PostBox";
 import { PostsStateModel } from "../../../../store/posts/postsModels";
 import { RootState } from "../../../../store/configureStore/store";

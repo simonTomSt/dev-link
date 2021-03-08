@@ -1,4 +1,3 @@
-import { Card, Container } from "react-bootstrap";
 import {
   ProfileRespModel,
   ProfilesStateModel,
@@ -10,10 +9,11 @@ import {
 } from "../../../../store/profiles/profilesActions";
 import { useDispatch, useSelector } from "react-redux";
 
+import AsyncWrapper from "../../../../components/common/asyncWrapper/AsyncWrapper";
+import { Container } from "react-bootstrap";
 import { RootState } from "../../../../store/configureStore/store";
 import { Routes } from "../../../../app/consts/RoutersConsts";
 import UserMainInfo from "../../../my-profile/views/profilePage/UserMainInfo";
-import { getUnpackedSettings } from "http2";
 import { useHistory } from "react-router";
 
 export default function DevelopersPage() {
@@ -36,15 +36,17 @@ export default function DevelopersPage() {
   }, [dispatch]);
   return (
     <Container>
-      {profiles?.map((data: ProfileRespModel) => (
-        <div key={data._id}>
-          {data._id !== profile?._id && (
-            <div className="mb-3" onClick={() => redirectToProfile(data)}>
-              <UserMainInfo info={data} />
-            </div>
-          )}
-        </div>
-      ))}
+      <AsyncWrapper>
+        {profiles?.map((data: ProfileRespModel) => (
+          <div key={data._id}>
+            {data._id !== profile?._id && (
+              <div className="mb-3" onClick={() => redirectToProfile(data)}>
+                <UserMainInfo info={data} />
+              </div>
+            )}
+          </div>
+        ))}
+      </AsyncWrapper>
     </Container>
   );
 }

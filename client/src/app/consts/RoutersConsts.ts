@@ -9,4 +9,5 @@ export enum Routes {
   EditMyProfile = "/my-profile/edit",
   EditMyEduc = "/my-profile/edit/education",
   EditMyExp = "/my-profile/edit/experience",
+  Post = "/post",
 }

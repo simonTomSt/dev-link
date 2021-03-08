@@ -1,7 +1,7 @@
 import { CodeSlash, Gear, PersonSquare } from "react-bootstrap-icons";
 import { Container, Dropdown, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
 
+import { NavLink } from "react-router-dom";
 import React from "react";
 import { Routes } from "../../../app/consts/RoutersConsts";
 import { logOutUser } from "../../../store/auth/authActions";

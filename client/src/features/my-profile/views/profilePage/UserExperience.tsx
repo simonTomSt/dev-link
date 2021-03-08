@@ -1,6 +1,7 @@
 import { Accordion, Button, Card, Col, Row } from "react-bootstrap";
 
 import { ExpModel } from "../../models/formSchema";
+import Moment from "react-moment";
 import React from "react";
 
 interface Props {
@@ -42,7 +43,12 @@ export default function UserExperience({ experience }: Props) {
                     <Col md={5}>
                       <p>
                         <span className="font-weight-bold mr-2">Period: </span>{" "}
-                        {exp.from} - {exp.current ? "current" : exp.to}
+                        <Moment date={exp.from} format="DD/MM/YYYY" /> -{" "}
+                        {exp.current ? (
+                          "current"
+                        ) : (
+                          <Moment date={exp.to} format="DD/MM/YYYY" />
+                        )}
                       </p>
                     </Col>
                   </Row>

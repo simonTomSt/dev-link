@@ -6,6 +6,7 @@ import DevelopersPage from "./features/developers/views/developersPage/Developer
 import EditEducation from "./features/my-profile/views/editProfile/EditEducation";
 import EditExperience from "./features/my-profile/views/editProfile/EditExperience";
 import EditProfile from "./features/my-profile/views/editProfile/EditProfile";
+import LandingPage from "./features/landing/LandingPage";
 import Login from "./features/auth/views/login/Login";
 import MainLayout from "./components/layouts/MainLayout";
 import MyPosts from "./features/posts/views/myPosts/MyPosts";
@@ -31,7 +32,7 @@ const App = () => {
   return (
     <Switch>
       <TopBarLoader />
-      <Route exact path={Routes.Home} />
+      <Route exact path={Routes.Home} component={LandingPage} />
       <Switch>
         <Route exact path={Routes.Register} component={Register} />
         <Route exact path={Routes.Login} component={Login} />

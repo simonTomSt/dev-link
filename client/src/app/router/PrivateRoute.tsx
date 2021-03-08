@@ -9,7 +9,7 @@ export interface IPrivateRouteProps extends RouteProps {
 
 const PrivateRoute: React.FC<IPrivateRouteProps> = (props) => {
   return props.isAuth ? (
-    <Route {...props} component={props.component} exact />
+    <Route {...props} component={props.component} />
   ) : (
     <Redirect to={{ pathname: props.redirectPath }} />
   );

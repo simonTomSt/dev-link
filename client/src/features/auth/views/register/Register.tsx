@@ -2,20 +2,30 @@ import "../../../../styles/general.css";
 
 import { Card, Container } from "react-bootstrap";
 import { ErrorMessage, Field, Formik, Form as FormikForm } from "formik";
+import { Link, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
 import { RegisterModel, registerSchema } from "../../models/formsSchemas";
+import { useDispatch, useSelector } from "react-redux";
 
 import AsyncWrapper from "../../../../components/common/asyncWrapper/AsyncWrapper";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
-import { Link } from "react-router-dom";
-import React from "react";
+import { RootState } from "../../../../store/configureStore/store";
 import { Routes } from "../../../../app/consts/RoutersConsts";
+import { authStateModel } from "../../../../store/auth/authModels";
 import { registerUser } from "../../../../store/auth/authActions";
 import { registerValues } from "../../models/formsValues";
-import { useDispatch } from "react-redux";
 
 export default function Register() {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { isAuth } = useSelector<RootState, authStateModel>(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    isAuth && history.push(Routes.Posts);
+  }, [history, isAuth]);
 
   return (
     <>

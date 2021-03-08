@@ -23,3 +23,21 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.post-date {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+}
+.post-actions {
+  position: absolute;
+  right: 35px;
+  bottom: 7px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.underlined {
+  text-decoration: underline;
+}

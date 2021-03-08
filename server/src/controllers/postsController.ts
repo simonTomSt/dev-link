@@ -17,13 +17,16 @@ export const createPost = async (
       return res.status(404).json({ msg: "There is no user with such id" });
     const newPost = new Post({
       text: req.body.text,
-      name: user.name,
+      name: req.body.name,
       avatar: user.avatar,
+      userName: user.name,
       user: req.body.user.id,
     });
-
-    const post = await newPost.save();
-    res.json(post);
+    await newPost.save();
+    const posts = await Post.find();
+    //@ts-ignore
+    const sorted = posts.sort((a, b) => b.date - a.date);
+    res.json(sorted);
   } catch (err) {
     console.log(err);
     res.status(500).send("Server error");
@@ -150,6 +153,8 @@ export const commentPost = async (
     const post = await Post.findById(req.params.id);
     if (!user)
       return res.status(404).json({ msg: "There is no user with such id" });
+
+    console.log(user.name);
 
     const newComment = ({
       text: req.body.text,

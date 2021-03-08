@@ -10,6 +10,7 @@ export default function UserGithub({ repos }: Props) {
     return (
       <Card className="mb-4">
         <Card.Body>
+          <h2>Repositories: </h2>
           <ListGroup>
             {repos?.map(({ id, name, html_url }) => (
               <ListGroup.Item as="a" href={html_url} key={id} target="_blank">

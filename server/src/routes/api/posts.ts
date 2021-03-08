@@ -20,7 +20,7 @@ import express from "express";
 export const router = express.Router();
 
 router.get("/", authMiddleware, getAllPosts);
-router.get("single/:id", authMiddleware, getPostById);
+router.get("/single/:id", authMiddleware, getPostById);
 router.get("/user", authMiddleware, getUserPosts);
 
 router.delete("/:id", authMiddleware, deletePostsById);

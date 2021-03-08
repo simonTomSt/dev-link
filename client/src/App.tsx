@@ -8,6 +8,7 @@ import EditExperience from "./features/my-profile/views/editProfile/EditExperien
 import EditProfile from "./features/my-profile/views/editProfile/EditProfile";
 import Login from "./features/auth/views/login/Login";
 import MainLayout from "./components/layouts/MainLayout";
+import MyPosts from "./features/posts/views/myPosts/MyPosts";
 import PostsPage from "./features/posts/views/postsPage/PostsPage";
 import PrivateRoute from "./app/router/PrivateRoute";
 import ProfilePage from "./features/my-profile/views/profilePage/ProfilePage";
@@ -17,6 +18,7 @@ import Register from "./features/auth/views/register/Register";
 import { RootState } from "./store/configureStore/store";
 import { Route } from "react-router";
 import { Routes } from "./app/consts/RoutersConsts";
+import SinglePost from "./features/posts/views/postsPage/SinglePost";
 import Switch from "react-bootstrap/esm/Switch";
 import { TopBarLoader } from "./components/common/loaders/TopBarLoader";
 import { authStateModel } from "./store/auth/authModels";
@@ -53,6 +55,8 @@ const App = () => {
           Routes.Posts,
           Routes.MyProfile,
           Routes.EditMyProfile,
+          Routes.MyPosts,
+          `${Routes.Post}/:id`,
         ]}
       >
         <MainLayout>
@@ -95,6 +99,18 @@ const App = () => {
             <PrivateRoute
               path={Routes.Developers}
               component={DevelopersPage}
+              isAuth={isAuth}
+              redirectPath={Routes.Login}
+            />
+            <PrivateRoute
+              path={Routes.MyPosts}
+              component={MyPosts}
+              isAuth={isAuth}
+              redirectPath={Routes.Login}
+            />
+            <PrivateRoute
+              path={`${Routes.Post}/:id`}
+              component={SinglePost}
               isAuth={isAuth}
               redirectPath={Routes.Login}
             />

@@ -3,27 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AsyncWrapper from "../../../../components/common/asyncWrapper/AsyncWrapper";
 import { Container } from "react-bootstrap";
-import CreatePost from "../createPost/CreatePost";
 import PostBox from "../postBox/PostBox";
 import { PostsStateModel } from "../../../../store/posts/postsModels";
 import { RootState } from "../../../../store/configureStore/store";
-import { getAllPosts } from "../../../../store/posts/postsActions";
-import { getUserProfile } from "../../../../store/profiles/profilesActions";
+import { getMyPosts } from "../../../../store/posts/postsActions";
 
-export default function PostsPage() {
+export default function MyPosts() {
   const dispatch = useDispatch();
-  const { posts } = useSelector<RootState, PostsStateModel>(
+  const { myPosts } = useSelector<RootState, PostsStateModel>(
     (state) => state.posts
   );
   useEffect(() => {
-    dispatch(getAllPosts());
-    dispatch(getUserProfile());
+    dispatch(getMyPosts());
   }, [dispatch]);
   return (
     <Container>
-      <CreatePost />
       <AsyncWrapper>
-        {posts?.map((post) => (
+        {myPosts.map((post) => (
           <PostBox post={post} key={post._id} />
         ))}
       </AsyncWrapper>

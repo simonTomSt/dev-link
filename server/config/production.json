@@ -1,6 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://simonst:admin123@devlink.qfkzi.mongodb.net/DevLink?retryWrites=true&w=majority",
-  "jwtToken": "secretToken",
-  "githubClientId": "a09f0ab7140c50d34c63",
-  "githubSecret": "f99e92733afccebc25819f7f5198b5805d10b102"
-}

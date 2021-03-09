@@ -24,6 +24,10 @@
     "request": "^2.88.2",
     "typescript": "^4.1.5"
   },
+  "engines": {
+    "node": "12.19.0",
+    "npm": "6.14.11"
+  },
   "dependencies": {
     "@types/body-parser": "^1.19.0",
     "bcrypt": "^5.0.0",

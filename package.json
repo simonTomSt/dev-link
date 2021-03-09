@@ -6,7 +6,10 @@
   "scripts": {
     "server": "npm run dev --prefix server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "deploy-server": "concurrently \"npm install --server\"  \"npm run tsc --profile ./ server\" \"npm run start --prefix server\"",
+    "deploy-client": "concurrently \"npm install --client\" \"npm run build --prefix client\"",
+    "deploy": "npm install  && concurrently \"npm run deploy-server\" \"npm run deploy-client\""
   },
   "repository": {
     "type": "git",
